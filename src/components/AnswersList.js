@@ -1,4 +1,5 @@
 import React from 'react';
+import Answer from './Answer';
 
 class AnswersList extends React.Component {
   constructor() {
@@ -8,30 +9,19 @@ class AnswersList extends React.Component {
     };
   }
 
-    getCountriesInformations() {
-        return new Promise((resolve, reject) => {
-            window.fetch('https://restcountries.eu/rest/v2/all')
-            .then(response => response.json())
-            .then(result => {
-                console.log('Réponse API Countries Informations', result)
-                resolve(result)
-            })
-            .catch(error => {
-                console.error(error)
-                reject(error)
-            })
-    })
-    }
+    
 
-    componentDidMount() {
-        this.getCountriesInformations()
-        this.setState({
-        someKey: 'otherValue'
-        });
-    }
+    
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    return (
+    <div className="answersListContainer">
+      <Answer />
+      <Answer />
+      <Answer />
+      <Answer />
+    </div>
+    )
   }
 
   
