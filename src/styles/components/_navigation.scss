@@ -1,0 +1,26 @@
+.sidebar{
+    background-color: $color-4;
+    border-radius: 10px;
+    padding: 5px 0;
+
+    .navigation{
+        margin-left: 100px;
+        ul{
+            display: flex;
+        }
+        li{
+            width: 170px;
+            list-style-type: none;
+            
+            a{
+                text-decoration: none;
+                color: $color-3;
+                font-weight: 600;
+            }
+
+            span{
+                margin-left: 10px;
+            }
+        }
+    }
+}

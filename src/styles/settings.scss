@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Josefin+Sans:wght@100&family=Nova+Round&display=swap');
+
+$font-1: 'Nova Round', cursive;
+$font-2: 'Dosis', sans-serif;
+$font-3: 'Josefin Sans', serif;
+
+$color-1: #0FA3b1;
+$color-2: #d9E5D6;
+$color-3: #eddea4;
+$color-4: #f7a072;
+$color-5: #ff9b42;
+$white: #ddd;
+$black: #333;
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 1rem auto;
+    max-width: 1200px;
+    font-family: $font-1;
+    color: $black;
+    background-color: $color-2;
+}
+.nameApp{
+    margin: 10px;
+    border: solid $black;
+    border-radius: 15px;
+    width: 300px;
+    padding-left: 10px;
+}
