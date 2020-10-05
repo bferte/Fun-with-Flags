@@ -9,7 +9,14 @@ class Flag extends React.Component {
   }
 
   render() {
-    return <p>{this.state.someKey}</p>;
+    let URL = "https://restcountries.eu/data/"+this.props.alpha3Code.toLowerCase()+".svg"
+
+    return (
+    <div className="flagContainer">
+      <img src = {URL} alt="" className="flagRightAnswer"/>
+    </div>
+    )
+    
   }
 
   componentDidMount() {
