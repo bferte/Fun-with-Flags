@@ -9,14 +9,14 @@ class Answer extends React.Component {
     };
   }
 
-
+ 
 
   render() {
    
     return (
 
       <Button variant="contained" color="primary">
-      {this.props.name}
+      {this.props.name} 
       </Button>
     
       )

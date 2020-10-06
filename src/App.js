@@ -9,7 +9,7 @@ function App() {
   return (
    <>
       <div className="nameApp">
-        <h1>KuniQuizz</h1>
+        <h1><span style={{color: 'red' }}>Fun</span> with Flags</h1>
         <h3>à qui appartient ce drapeau ?</h3>               
       </div>
    <BrowserRouter>

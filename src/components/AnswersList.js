@@ -1,7 +1,11 @@
 import React from 'react';
 import Answer from './Answer';
 import Flag from './Flag';
+import Meter from './Meter'
 import { getRandomInt,getRightAnswerInfos } from '../service/Api'
+
+import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Button';
 
 class AnswersList extends React.Component {
   constructor() {
@@ -9,37 +13,57 @@ class AnswersList extends React.Component {
     this.state = {
       isLoaded: false,
       infos: [],
-      rightInfos: [],
-      falseInfos: [],
       answers: [1,2,3,4],
+      score: 0,
+      round: 0,
+      
      
     };
+    this.handleWrongResponse = this.handleWrongResponse.bind(this)
   }
+
+  handleAddScore() {
+
+  this.setState({score: this.state.score + 1 })
+  this.setState({round: this.state.round + 1 })
+  console.log(this.state.round)
+  }
+
+
+
+  handleWrongResponse(event) {
+    let x = event.currentTarget
+    console.log(x)
+    
+    
+    x.classList.add("wrongResponseBtn")
+    setTimeout(function(){x.classList.remove("wrongResponseBtn")},1000)
+
+    
+    this.setState({round: this.state.round + 1 })
+  
+
+  }
+/////
+
+
+
+  //////
+  handleRoundAddOne = () => {
 
   
 
+  }
+
+/////
 
   componentDidMount() {
     getRightAnswerInfos()
     .then (data => this.setState({infos: data,
       isLoaded: true
-    }))
-
-    
-   
-   
-  
-    
-
-    
-    
-
-
-    // .then(this.setState.rightInfos = this.state.infos[getRandomInt(0,250)])
-    // .then(console.log(this.state.rightInfos))
-    
-    
+    }))  
   }
+
 
 
 
@@ -58,7 +82,9 @@ class AnswersList extends React.Component {
     // if (wrongNumber[0] === (rightNumber || wrongNumber[1] || wrongNumber[2] ) {
       
     // }
+    //<Button variant="contained" color="primary" onClick={() => this.handleAddScore()}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
     
+    //<Answer key={index} response={false} name={this.state.infos[wrongNumber.shift()].name}/>
 
     
     
@@ -67,6 +93,7 @@ class AnswersList extends React.Component {
       console.log(this.state)
         return (
         <>
+          <Meter score={this.state.score}/>
           <div className="flagContainer">
             {console.log(this.props)}
             <Flag alpha3Code={this.state.infos[rightNumber].alpha3Code}/>
@@ -76,11 +103,12 @@ class AnswersList extends React.Component {
             {
           answers.map((value,index) => {
             if(value == 1) {
-             return  <Answer key={index} name={this.state.infos[rightNumber].name} />
+             return  <Button key={index} variant="contained" color="primary" onClick={() => this.handleAddScore()}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
 
             }
             else {
-              return <Answer key={index} name={this.state.infos[wrongNumber.shift()].name}/>
+              return  <Button key={index} id={"wrgBtn"+index} onClick={this.handleWrongResponse}  variant="contained" color="primary" >{this.state.infos[wrongNumber.shift()].name}</Button>
+                          
             }
             
             
@@ -88,6 +116,7 @@ class AnswersList extends React.Component {
             
           })
             }
+            <Modal />
           </div>
           
 
