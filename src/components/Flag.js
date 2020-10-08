@@ -13,7 +13,7 @@ class Flag extends React.Component {
 
     return (
     <div className="flagContainer">
-      <img src = {URL} alt="" className="flagRightAnswer"/>
+      <img  id='flag' src = {URL} alt="" className="flagRightAnswer"/>
     </div>
     )
     

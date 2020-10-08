@@ -25,7 +25,7 @@ margin: 15px !important;
 .meterContainer{
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 115px;
     height: 40px;
     background-color:#3f51b5;
     color: $white;
@@ -38,4 +38,43 @@ margin: 15px !important;
 }
 .wrongResponseBtn{
     background-color: rgb(221, 31, 31) !important;
+}
+#incorrect{
+    margin: auto;
+    background-color: rgb(243, 62, 62);
+    width: 250px;
+    height: 70px;
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    
+        span{
+            font-family: $font-2;
+            font-size: 30px;
+        }
+
+}
+#correct{
+    margin: auto;
+    background-color: rgb(25, 202, 78);
+    width: 250px;
+    height: 70px;
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    
+        span{
+            font-family: $font-2;
+            font-size: 30px;
+        }
+
+}
+
+#flag{
+
+    
 }

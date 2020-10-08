@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Meter extends React.Component {
+class RoundMeter extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -12,8 +12,8 @@ class Meter extends React.Component {
     return (
     <div className="meterContainer">
       
-        <div>SCORE :&nbsp;</div>
-        <div>{this.props.score}</div>
+        <div>ROUND :&nbsp;</div>
+        <div>{this.props.round}</div>
 
    
     </div>
@@ -29,4 +29,5 @@ class Meter extends React.Component {
   }
 }
 
-export default Meter;
+export default RoundMeter;
+

@@ -43,3 +43,18 @@ export function getfalseAnswerInfos() {
     })
   })
 }
+
+export function displayCorrect() {
+  let correct = document.getElementById('correct')
+  correct.style.display = "flex"
+  let flag = document.getElementById('flag')
+  flag.style.display = "none"
+}
+
+export function displayIncorrect() {
+  let incorrect = document.getElementById('incorrect')
+  incorrect.style.display = "flex"
+  let flag = document.getElementById('flag')
+  flag.style.display = "none"
+  
+}

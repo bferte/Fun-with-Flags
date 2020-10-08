@@ -2,7 +2,9 @@ import React from 'react';
 import Answer from './Answer';
 import Flag from './Flag';
 import Meter from './Meter'
-import { getRandomInt,getRightAnswerInfos } from '../service/Api'
+import RoundMeter from './RoundMeter'
+
+import { getRandomInt,getRightAnswerInfos,displayIncorrect } from '../service/Api'
 
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Button';
@@ -20,6 +22,7 @@ class AnswersList extends React.Component {
      
     };
     this.handleWrongResponse = this.handleWrongResponse.bind(this)
+    this.handleAddScore = this.handleAddScore.bind(this)
   }
 
   handleAddScore() {
@@ -30,19 +33,49 @@ class AnswersList extends React.Component {
   }
 
 
+  handleRightResponse() {
 
+    
+  }
+
+  /////////
+  removeIncorrect() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        document.getElementById('incorrect').style.display="none";
+        document.getElementById('flag').style.display='block';
+        resolve('resolved');
+      }, 2000);
+    });
+  }
+
+  async addround() {
+    await this.removeIncorrect();
+    this.setState({round: this.state.round + 1 })
+  }
+
+
+
+//////////////
   handleWrongResponse(event) {
     let x = event.currentTarget
     console.log(x)
-    
-    
     x.classList.add("wrongResponseBtn")
-    setTimeout(function(){x.classList.remove("wrongResponseBtn")},1000)
+    displayIncorrect()
 
     
-    this.setState({round: this.state.round + 1 })
-  
+    setTimeout(function(){x.classList.remove("wrongResponseBtn")},1500)
+   // setTimeout(function(){document.getElementById('flag').style.display='block'},1500)
+    // setTimeout(function(){document.getElementById('incorrect').style.display="none"},1500)
 
+    // this.setState({round: this.state.round + 1 })
+///////
+    this.removeIncorrect();
+    this.addround();
+
+
+  
+/////////
   }
 /////
 
@@ -82,9 +115,7 @@ class AnswersList extends React.Component {
     // if (wrongNumber[0] === (rightNumber || wrongNumber[1] || wrongNumber[2] ) {
       
     // }
-    //<Button variant="contained" color="primary" onClick={() => this.handleAddScore()}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
     
-    //<Answer key={index} response={false} name={this.state.infos[wrongNumber.shift()].name}/>
 
     
     
@@ -94,16 +125,19 @@ class AnswersList extends React.Component {
         return (
         <>
           <Meter score={this.state.score}/>
+          <RoundMeter round={this.state.round}/>
           <div className="flagContainer">
             {console.log(this.props)}
             <Flag alpha3Code={this.state.infos[rightNumber].alpha3Code}/>
+            <div id='incorrect'><span>INCORRECT</span></div>
+            <div id='correct'><span>CORRECT</span></div>
           </div>
           
           <div className="answersListContainer">
             {
           answers.map((value,index) => {
             if(value == 1) {
-             return  <Button key={index} variant="contained" color="primary" onClick={() => this.handleAddScore()}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
+             return  <Button key={index} id={"rightBtn"} variant="contained" color="primary" onClick={this.handleAddScore}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
 
             }
             else {
