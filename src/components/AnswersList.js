@@ -1,10 +1,9 @@
 import React from 'react';
-import Answer from './Answer';
 import Flag from './Flag';
 import Meter from './Meter'
 import RoundMeter from './RoundMeter'
 
-import { getRandomInt,getRightAnswerInfos,displayIncorrect } from '../service/Api'
+import { getRandomInt,getRightAnswerInfos,displayIncorrect,displayCorrect } from '../service/Api'
 
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Button';
@@ -18,27 +17,20 @@ class AnswersList extends React.Component {
       answers: [1,2,3,4],
       score: 0,
       round: 0,
+      answered: false,
       
      
     };
     this.handleWrongResponse = this.handleWrongResponse.bind(this)
-    this.handleAddScore = this.handleAddScore.bind(this)
+    this.handleRightResponse = this.handleRightResponse.bind(this)
   }
 
-  handleAddScore() {
-
-  this.setState({score: this.state.score + 1 })
-  this.setState({round: this.state.round + 1 })
-  console.log(this.state.round)
-  }
+  
 
 
-  handleRightResponse() {
+  
 
-    
-  }
 
-  /////////
   removeIncorrect() {
     return new Promise(resolve => {
       setTimeout(() => {
@@ -48,16 +40,27 @@ class AnswersList extends React.Component {
       }, 2000);
     });
   }
+  removeCorrect() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        document.getElementById('correct').style.display="none";
+        document.getElementById('flag').style.display='block';
+        resolve('resolved');
+      }, 2000);
+    });
+  }
 
-  async addround() {
+
+  async addRound() {
     await this.removeIncorrect();
     this.setState({round: this.state.round + 1 })
+    this.setState({answered: false})
   }
 
 
 
 //////////////
-  handleWrongResponse(event) {
+  handleWrongResponse(event) { 
     let x = event.currentTarget
     console.log(x)
     x.classList.add("wrongResponseBtn")
@@ -65,30 +68,28 @@ class AnswersList extends React.Component {
 
     
     setTimeout(function(){x.classList.remove("wrongResponseBtn")},1500)
-   // setTimeout(function(){document.getElementById('flag').style.display='block'},1500)
-    // setTimeout(function(){document.getElementById('incorrect').style.display="none"},1500)
-
-    // this.setState({round: this.state.round + 1 })
-///////
+  
     this.removeIncorrect();
-    this.addround();
+    this.addRound();
 
-
-  
-/////////
-  }
-/////
-
-
-
-  //////
-  handleRoundAddOne = () => {
-
-  
 
   }
 
-/////
+  handleRightResponse(event) {
+    this.setState({answered: true})
+    let x = event.currentTarget
+    console.log(x)
+    x.classList.add("rightResponseBtn")
+    displayCorrect()
+
+    
+    setTimeout(function(){x.classList.remove("rightResponseBtn")},1500)
+  
+    this.removeCorrect();
+    this.addRound();
+    
+  }
+
 
   componentDidMount() {
     getRightAnswerInfos()
@@ -137,7 +138,7 @@ class AnswersList extends React.Component {
             {
           answers.map((value,index) => {
             if(value == 1) {
-             return  <Button key={index} id={"rightBtn"} variant="contained" color="primary" onClick={this.handleAddScore}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
+             return  <Button key={index} id={"rightBtn"} variant="contained" color="primary" onClick={this.handleRightResponse}>{this.state.infos[rightNumber].name+' >GG<'}</Button>
 
             }
             else {
