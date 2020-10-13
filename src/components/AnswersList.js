@@ -16,7 +16,7 @@ class AnswersList extends React.Component {
       infos: [],
       answers: [1,2,3,4],
       score: 0,
-      round: 0,
+      round: 1,
       answered: false,
       
      
@@ -57,6 +57,12 @@ class AnswersList extends React.Component {
     this.setState({answered: false})
   }
 
+  async addScore() {
+    await this.removeCorrect();
+    this.setState({score: this.state.score + 1 })
+    this.setState({answered: false})
+  }
+
 
 
 //////////////
@@ -87,6 +93,7 @@ class AnswersList extends React.Component {
   
     this.removeCorrect();
     this.addRound();
+    this.addScore();
     
   }
 
